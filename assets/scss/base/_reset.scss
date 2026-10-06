@@ -1,0 +1,48 @@
+*{margin:0;padding:0;font:inherit;color:inherit;}
+*, :after, :before {box-sizing:border-box;}
+
+@font-face {
+  font-family: "ATK";
+ src: url('../font/ATK-Studio.woff') format("woff");
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "NMMedium";
+  font-weight: 500;
+  src: url('../font/NM-Medium.woff2') format("woff2");
+  font-style: normal;
+  font-display: swap
+}
+
+
+@font-face {
+  font-family: "Atk Studio Tiposka";
+  src: url('../font/ATK-Studio.woff') format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url('../font/Pretendard-Regular.woff') format("woff");
+}
+@font-face {
+  font-family: "Pretendard-Bold";
+  src: url('../font/Pretendard-Bold.woff') format("woff");
+}
+@font-face {
+  font-family: 'Bulevar';
+  src: url('../font/631e4416700e2c5aacd666eb_Bulevar-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+html, body {height:100%;}
+img, picture, video, canvas, svg {display: block;max-width:100%;}
+button {background:none;border:0;cursor:pointer;}
+a {text-decoration:none}
+table {border-collapse:collapse;border-spacing:0}
+ul{list-style: none;}

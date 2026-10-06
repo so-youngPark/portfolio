@@ -1,0 +1,20 @@
+#header{
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  .logo-area{
+    .logo{
+      font-size: 39px;
+      font-family: 'Bulevar', sans-serif;
+      position: absolute;
+      top: 20px;
+      left: 60px;
+      @include mobile{
+        left: 30px;
+      }
+      @include mobile-sm{
+        left: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.17/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+  <script defer src="./assets/js/main.js"></script>
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+    <symbol id="icon" width="100%" height="100%" viewBox="0 0 19 20" fill="none">
+      <path
+        d="M7.95946 0H11.0405C11.6568 0 12.0676 0.401 12.0676 1.00251V5.16291C12.0676 5.76441 11.7081 6.26566 11.0919 6.41604L7.90811 7.26817C7.29189 7.41855 6.82973 7.86967 6.67568 8.47118L5.8027 11.5288C5.64865 12.1303 5.13513 12.4812 4.51892 12.4812H1.02703C0.410811 12.4812 0 12.0802 0 11.4787V8.5213C0 7.9198 0.410811 7.5188 1.02703 7.5188H4.57027C5.85405 7.5188 6.93243 6.46616 6.93243 5.21303V1.00251C6.93243 0.401 7.34324 0 7.95946 0ZM11.0405 20H7.95946C7.34324 20 6.93243 19.599 6.93243 18.9975V14.8371C6.93243 14.2356 7.29189 13.7343 7.90811 13.584L11.0919 12.7318C11.7081 12.5815 12.1703 12.1303 12.3243 11.5288L13.1973 8.47118C13.3514 7.86967 13.8649 7.5188 14.4811 7.5188H17.973C18.5892 7.5188 19 7.9198 19 8.5213V11.4787C19 12.0802 18.5892 12.4812 17.973 12.4812H14.4297C13.1459 12.4812 12.0676 13.5338 12.0676 14.787V18.9975C12.0676 19.599 11.6568 20 11.0405 20Z"
+        fill="currentColor"></path>
+    </symbol>
+    <symbol id="corner1" width="100%" height="100%" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M3.10795 23.5L1.02687 23.5C0.410659 23.5 -0.000150645 23.099 -0.000150593 22.4975L-0.000147359 7.31825C-0.000147306 6.71675 0.359311 6.2155 0.975526 6.06512L4.15931 5.21299C4.77552 5.06261 5.23768 4.61149 5.39174 4.00998L6.26471 0.95234C6.41876 0.350836 6.93227 -4.15027e-05 7.54849 -4.14488e-05L22.473 -4.01441e-05C23.0892 -4.00902e-05 23.5 0.400963 23.5 1.00247L23.5 2.95986C23.5 3.56136 23.0892 3.96236 22.473 3.96236L7.49714 3.96236C6.21335 3.96236 4.13498 6.015 4.13498 7.26813L4.13497 22.4975C4.13497 23.099 3.72417 23.5 3.10795 23.5Z"
+        fill="currentColor"></path>
+    </symbol>
+    <symbol id="corner2" width="100%" height="100%" viewBox="0 0 17 16" fill="none">
+      <path
+        d="M0.499998 2.11601L0.499998 0.699102C0.499998 0.27955 0.77302 -0.000151121 1.18256 -0.000151139L11.5174 -0.000150292C11.9269 -0.00015031 12.2682 0.244588 12.3706 0.66414L12.9508 2.83183C13.0531 3.25138 13.3603 3.56604 13.7698 3.67093L15.8516 4.26529C16.2612 4.37018 16.5001 4.71981 16.5001 5.13936L16.5001 15.3007C16.5001 15.7203 16.2271 16 15.8175 16L14.4848 16C14.0753 16 13.8023 15.7203 13.8023 15.3007L13.8023 5.1044C13.8023 4.23033 12.4047 2.81526 11.5515 2.81526L1.18256 2.81526C0.77302 2.81526 0.499998 2.53556 0.499998 2.11601Z"
+        fill="currentColor"></path>
+    </symbol>
+    <symbol id="corner3" width="100%" height="100%" viewBox="0 0 16 17" fill="none">
+      <path
+        d="M2.11601 0.5L0.699102 0.5C0.27955 0.5 -0.000151086 0.773022 -0.00015105 1.18256L-0.000148848 11.5174C-0.000148812 11.9269 0.244589 12.2682 0.664142 12.3706L2.83183 12.9508C3.25138 13.0532 3.56604 13.3603 3.67093 13.7698L4.2653 15.8516C4.37018 16.2612 4.71981 16.5001 5.13936 16.5001L15.3007 16.5001C15.7203 16.5001 16 16.2271 16 15.8175L16 14.4848C16 14.0753 15.7203 13.8023 15.3007 13.8023L5.1044 13.8023C4.23033 13.8023 2.81526 12.4047 2.81526 11.5515L2.81526 1.18256C2.81526 0.773022 2.53556 0.5 2.11601 0.5Z"
+        fill="currentColor"></path>
+    </symbol>
+    <symbol id="corner4" width="100%" height="100%" viewBox="0 0 16 16" fill="none">
+      <path
+        d="M-1.91477e-06 13.8839L-2.00646e-06 15.3008C-2.0248e-06 15.7204 0.273019 16.0001 0.682554 16.0001L11.0173 16.0001C11.4269 16.0001 11.7682 15.7553 11.8705 15.3358L12.4507 13.1681C12.5531 12.7486 12.8602 12.4339 13.2698 12.329L15.3516 11.7347C15.7611 11.6298 16 11.2801 16 10.8606L16 0.699252C16 0.279701 15.727 6.87448e-07 15.3174 6.69547e-07L13.9848 5.81532e-07C13.5752 5.63631e-07 13.3022 0.279701 13.3022 0.699252L13.3022 10.8956C13.3022 11.7696 11.9047 13.1847 11.0515 13.1847L0.682554 13.1847C0.273019 13.1847 -1.89643e-06 13.4644 -1.91477e-06 13.8839Z"
+        fill="currentColor"></path>
+    </symbol>
+    <symbol id="arrow" width="100%" height="100%" viewBox="0 0 13 12" fill="none">
+      <path
+        d="M9.95614 9.02338H8.33283C8.08933 9.02338 7.927 9.18571 7.927 9.42921V10.6467C7.927 10.8902 7.76467 11.0525 7.52117 11.0525H5.89785C5.65435 11.0525 5.49202 10.8902 5.49202 10.6467V9.42921C5.49202 9.18571 5.65435 9.02338 5.89785 9.02338H6.99359C7.50088 9.02338 7.927 8.63784 7.927 8.11027V7.40007C7.927 7.15657 8.08933 6.99424 8.33283 6.99424H9.95614C10.4431 6.99424 10.5649 6.38549 10.5649 5.99996C10.5649 5.61442 10.4431 5.00568 9.95614 5.00568H8.33283C8.08933 5.00568 7.927 4.84334 7.927 4.59985V3.88965C7.927 3.36207 7.50088 2.97653 6.99359 2.97653H5.89785C5.65435 2.97653 5.49202 2.8142 5.49202 2.5707V1.35322C5.49202 1.10972 5.65435 0.947388 5.89785 0.947388H7.52117C7.76467 0.947388 7.927 1.10972 7.927 1.35322V2.5707C7.927 2.8142 8.08933 2.97653 8.33283 2.97653H9.95614C10.1996 2.97653 10.362 3.13886 10.362 3.38236V4.07227C10.362 4.57956 10.7881 4.98538 11.2954 4.98538H12.594C12.8375 4.98538 12.9999 5.14772 12.9999 5.39121V6.6087C12.9999 6.8522 12.8375 7.01453 12.594 7.01453H11.2954C10.7881 7.01453 10.362 7.42036 10.362 7.92764V8.61755C10.362 8.86105 10.1996 9.02338 9.95614 9.02338Z"
+        fill="currentColor"></path>
+      <path
+        d="M0.5 5.2563H8.04289C8.2871 5.2563 8.4499 5.37938 8.4499 5.564V6.4717C8.4499 6.65632 8.2871 6.7794 8.04289 6.7794H0.5C0.255789 6.7794 0.0929826 6.65632 0.0929826 6.4717V5.564C0.0929826 5.37938 0.255789 5.2563 0.5 5.2563Z"
+        fill="currentColor"></path>
+    </symbol>
+  </svg>
+  <div id="wrap">
+    <header id="header">
+      <h2 class="blind">헤더영역</h2>
+      <div class="logo-area">
+        <a href class="logo">
+          <span>soyoung</span>
+        </a>
+      </div>
+    </header>
+    <main id="main">
+      <div class="cursor">
+        <span class="cursor-inner"></span>
+      </div>
+
+      <div id="preloader">
+        <h2 class="blind">프리로더영역</h2>
+        <div class="preloader-content-wrapper">
+          <div class="txt-wrapper">
+            <p class="txt">
+              <span>soyoung's</span>
+            </p>
+            <p class="txt">
+              <span>portfolio</span>
+            </p>
+          </div>
+          <div class="counter-wrapper">
+            <span class="counter" data-count="100">0</span>
+            <span class="per">%</span>
+          </div>
+        </div>
+      </div>
+      <div class="inner">
+        <section class="sc-intro">
+          <h2 class="blind">시작섹션</h2>
+          <div class="content">
+            <div class="group-txt">
+              <span class="txt">
+                <span><i>Web</i> Publisher</span>
+              </span>
+              <span class="txt">
+                <span>portfolio</span>
+              </span>
+            </div>
+          </div>
+          <div class="bg">
+            <div class="bg-inner">
+              <video loop autoplay muted src="./assets/images/bg.mp4"></video>
+            </div>
+          </div>
+        </section>
+        <section id="about" class="sc-about">
+          <h2 class="blind">자기소개섹션</h2>
+          <div class="top-txt-area">
+            <div class="top-txt">
+              <span><i>A</i>bout</span>
+              <span><i>M</i>e</span>
+            </div>
+            <div class="line"></div>
+          </div>
+          <div class="bottom-txt-area">
+            <div class="corner top-left">
+              <svg>
+                <use xlink:href="#corner1"></use>
+              </svg>
+            </div>
+            <div class="corner top-right">
+              <svg>
+                <use xlink:href="#corner2"></use>
+              </svg>
+            </div>
+            <div class="corner bottom-left">
+              <svg>
+                <use xlink:href="#corner3"></use>
+              </svg>
+            </div>
+            <div class="corner bottom-right">
+              <svg>
+                <use xlink:href="#corner4"></use>
+              </svg>
+            </div>
+            <div class="txt">
+              <p>
+                저는 새로운 기술에 흥미를 느끼고, 배우고 적용하는 과정에서 즐거움을 찾는 웹 퍼블리셔입니다. 어릴 때부터 다양한 기술과 창의적인 작업들이 어떻게 만들어지고 작동하는지 궁금해했으며,
+                이러한 호기심은 지금도 새로운 웹 기술을 탐구하고 도전하는 원동력이 되고 있습니다.<br><br>
+              </p>
+              <p>
+                실무에서는 다양한 웹사이트의 구축과 리뉴얼, 유지보수를 경험하며 반응형 퍼블리싱과 인터랙션 구현 역량을 쌓아왔습니다. 단순히 디자인을 구현하는 것을 넘어, 웹 표준과 접근성을 고려한
+                마크업과 효율적인 코드 작성의 중요성을 배우고 있습니다. 앞으로도 탄탄한 기본기를 바탕으로 사용자 경험을 고민하고, 끊임없이 배우며 성장하는 웹 퍼블리셔가 되고자 합니다.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section id="projects" class="sc-project">
+        <h2 class="blind">프로젝트섹션</h2>
+        <div class="title-area">
+          <div class="title">WORK</div>
+          <!-- <div class="acc">실무를 통해 쌓은 프로젝트 경험</div> -->
+          <div class="acc">실무 프로젝트</div>
+        </div>
+        <div class="project-wrapper">
+          <div class="top-area">
+            <h3 class="name"><i>c</i>rack <i>t</i>he <i>n</i>uts</h3>
+            <div class="num">[ <span>01</span> ]</div>
+            <div class="icon-wrapper">
+              <div class="icon">
+                <svg>
+                  <use xlink:href="#icon"></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="info-wrapper">
+              <div class="txt-area">
+                <ul class="hashtag">
+                  <li>#scss</li>
+                  <li>#gsap</li>
+                  <li>#js</li>
+                  <li>#swiper</li>
+                  <li>#scrollTrigger</li>
+                  <li>#jQuery</li>
+                </ul>
+                <p class="txt">
+                  그누보드 기반 사이트를 퍼블리싱하고, 다양한 인터랙션과 스크롤 애니메이션을 구현한 반응형 웹사이트입니다.
+                </p>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn-txt-area">
+                  <a href="https://crackthenuts.com" target="_blank" class="btn">
+                    <div class="arrow-icon">
+                      <svg>
+                        <use xlink:href="#arrow"></use>
+                      </svg>
+                      <svg>
+                        <use xlink:href="#arrow"></use>
+                      </svg>
+                    </div>
+                    <span class="arrow-txt" data-content="crackthenuts">
+                      <span>crackthenuts</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="img-area">
+              <img loading="eager" src="./assets/images/01_bg.jpg" alt="crackthenuts" class="project-img" />
+            </div>
+          </div>
+          <div class="corner top-left">
+            <svg>
+              <use xlink:href="#corner1"></use>
+            </svg>
+          </div>
+          <div class="corner top-right">
+            <svg>
+              <use xlink:href="#corner2"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-left">
+            <svg>
+              <use xlink:href="#corner3"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-right">
+            <svg>
+              <use xlink:href="#corner4"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="project-wrapper">
+          <div class="top-area">
+            <h3 class="name"><i>s</i>torms<i>t</i>est</h3>
+            <div class="num">[ <span>02</span> ]</div>
+            <div class="icon-wrapper">
+              <div class="icon">
+                <svg>
+                  <use xlink:href="#icon"></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="info-wrapper">
+              <div class="txt-area">
+                <ul class="hashtag">
+                  <li>#scss</li>
+                  <li>#gsap</li>
+                  <li>#js</li>
+                  <li>#swiper</li>
+                  <li>#scrollTrigger</li>
+                  <li>#jQuery</li>
+                </ul>
+                <p class="txt">
+                  그누보드 기반 사이트를 퍼블리싱하고, 다양한 인터랙션과 스크롤 애니메이션을 구현한 반응형 웹사이트입니다.
+                </p>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn-txt-area">
+                  <a href="https://stormstest.com/" target="_blank" class="btn">
+                    <div class="arrow-icon">
+                      <svg>
+                        <use xlink:href="#arrow"></use>
+                      </svg>
+                      <svg>
+                        <use xlink:href="#arrow"></use>
+                      </svg>
+                    </div>
+                    <span class="arrow-txt" data-content="stormstest">
+                      <span>stormstest</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="img-area">
+              <img loading="eager" src="./assets/images/stormstest.png" alt="stormstest" class="project-img" />
+            </div>
+          </div>
+          <div class="corner top-left">
+            <svg>
+              <use xlink:href="#corner1"></use>
+            </svg>
+          </div>
+          <div class="corner top-right">
+            <svg>
+              <use xlink:href="#corner2"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-left">
+            <svg>
+              <use xlink:href="#corner3"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-right">
+            <svg>
+              <use xlink:href="#corner4"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="project-wrapper">
+          <div class="top-area">
+            <h3 class="name"><i>b</i>laupunkt</h3>
+            <div class="num">[ <span>03</span> ]</div>
+            <div class="icon-wrapper">
+              <div class="icon">
+                <svg>
+                  <use xlink:href="#icon"></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="info-wrapper">
+              <div class="txt-area">
+                <ul class="hashtag">
+                  <li>#Cafe24</li>
+                  <li>#JS</li>
+                  <li>#jQuery</li>
+                  <li>#GSAP</li>
+                  <li>#ScrollTrigger</li>
+                  <li>#Swiper</li>
+                  <li>#CSS3</li>
+                </ul>
+                <p class="txt">
+                  Cafe24 플랫폼을 기반으로 기존 쇼핑몰의 레이아웃과 UI를 개선하고, 반응형 퍼블리싱을 진행한 리뉴얼 웹사이트입니다.
+                </p>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn-txt-area">
+                  <a href="https://blaupunkt-life.kr/" target="_blank" class="btn">
+                    <div class="arrow-icon">
+                      <svg>
+                        <use xlink:href="#arrow"></use>
+                      </svg>
+                      <svg>
+                        <use xlink:href="#arrow"></use>
+                      </svg>
+                    </div>
+                    <span class="arrow-txt" data-content="blaupunkt">
+                      <span>blaupunkt</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="img-area">
+              <img loading="eager" src="./assets/images/blaupunkt.png" alt="blaupunkt" class="project-img" />
+            </div>
+          </div>
+          <div class="corner top-left">
+            <svg>
+              <use xlink:href="#corner1"></use>
+            </svg>
+          </div>
+          <div class="corner top-right">
+            <svg>
+              <use xlink:href="#corner2"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-left">
+            <svg>
+              <use xlink:href="#corner3"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-right">
+            <svg>
+              <use xlink:href="#corner4"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="project-wrapper">
+          <div class="top-area">
+            <h3 class="name">re<i>b</i>uy<i>f</i>or<i>y</i>ou</h3>
+            <div class="num">[ <span>04</span> ]</div>
+            <div class="icon-wrapper">
+              <div class="icon">
+                <svg>
+                  <use xlink:href="#icon"></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="info-wrapper">
+              <div class="txt-area">
+                <ul class="hashtag">
+                  <li>#Cafe24</li>
+                  <li>#JS</li>
+                  <li>#jQuery</li>
+                  <li>#GSAP</li>
+                  <li>#ScrollTrigger</li>
+                  <li>#Swiper</li>
+                  <li>#CSS3</li>
+                </ul>
+                <p class="txt">
+                  Cafe24 플랫폼을 기반으로 기존 쇼핑몰의 레이아웃과 UI를 개선하고, 반응형 퍼블리싱부터 지속적인 유지보수 및 매월 이벤트 페이지 제작·운영까지 담당한 리뉴얼 웹사이트입니다.
+                </p>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn-txt-area">
+                  <a href="https://rebuyforyou.com" target="_blank" class="btn">
+                    <div class="arrow-icon">
+                      <svg>
+                        <use xlink:href="#arrow"></use>
+                      </svg>
+                      <svg>
+                        <use xlink:href="#arrow"></use>
+                      </svg>
+                    </div>
+                    <span class="arrow-txt" data-content="rebuyforyou">
+                      <span>rebuyforyou</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="img-area">
+              <img loading="eager" src="./assets/images/rbfy.jpg" alt="rebuyforyou" class="project-img" />
+            </div>
+          </div>
+          <div class="corner top-left">
+            <svg>
+              <use xlink:href="#corner1"></use>
+            </svg>
+          </div>
+          <div class="corner top-right">
+            <svg>
+              <use xlink:href="#corner2"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-left">
+            <svg>
+              <use xlink:href="#corner3"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-right">
+            <svg>
+              <use xlink:href="#corner4"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="title-area">
+          <div class="title">PERSONAL</div>
+          <!-- <div class="acc">취업을 준비하며 쌓은 프로젝트 경험</div> -->
+          <div class="acc">개인 프로젝트</div>
+        </div>
+        <div class="personal-wrapper">
+          <div class="corner top-left">
+            <svg>
+              <use xlink:href="#corner1"></use>
+            </svg>
+          </div>
+          <div class="corner top-right">
+            <svg>
+              <use xlink:href="#corner2"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-left">
+            <svg>
+              <use xlink:href="#corner3"></use>
+            </svg>
+          </div>
+          <div class="corner bottom-right">
+            <svg>
+              <use xlink:href="#corner4"></use>
+            </svg>
+          </div>
+          <div class="project-wrapper">
+            <div class="top-area">
+              <div class="num">[ <span>01</span> ]</div>
+              <div class="icon-wrapper">
+                <div class="icon">
+                  <svg>
+                    <use xlink:href="#icon"></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="info-wrapper">
+                <div class="txt-area">
+                  <ul class="hashtag">
+                    <li>#scss</li>
+                    <li>#gsap</li>
+                    <li>#js</li>
+                    <li>#swiper</li>
+                    <li>#lenis</li>
+                    <li>#scrollTrigger</li>
+                    <li>#jQuery</li>
+                  </ul>
+                  <p class="txt">
+                    SCSS를 사용하여 타 홈페이지의 기본 구조를 클론 코딩한 후,
+                    디자인 및 사용자 경험을 향상시키는 스타필드 홈페이지로
+                    개선한 반응형 사이트입니다.
+                  </p>
+                </div>
+                <div class="btn-wrapper">
+                  <div class="btn-txt-area">
+                    <a href="https://so-youngpark.github.io/starfield/" target="_blank" class="btn">
+                      <div class="arrow-icon">
+                        <svg>
+                          <use xlink:href="#arrow"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="#arrow"></use>
+                        </svg>
+                      </div>
+                      <span class="arrow-txt" data-content="starfield">
+                        <span>starfield</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="img-area">
+                <img loading="eager" src="./assets/images/star.jpg" alt="starfield" class="project-img" />
+              </div>
+            </div>
+          </div>
+          <div class="project-wrapper">
+            <div class="top-area">
+              <div class="num">[ <span>02</span> ]</div>
+              <div class="icon-wrapper">
+                <div class="icon">
+                  <svg>
+                    <use xlink:href="#icon"></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="info-wrapper">
+                <div class="txt-area">
+                  <ul class="hashtag">
+                    <li>#scss</li>
+                    <li>#gsap</li>
+                    <li>#js</li>
+                    <li>#swiper</li>
+                    <li>#scrollTrigger</li>
+                    <li>#jQuery</li>
+                    <li>#canvas</li>
+                  </ul>
+                  <p class="txt">
+                    SCSS를 사용하여 애플워치 사이트를 클론 코딩한 사이트로,
+                    GSAP, Swiper와 함께 Canvas 애니메이션을 활용하여 다양한
+                    사용자 동작에 반응하는 효과를 적용한 사이트입니다.
+                  </p>
+                </div>
+                <div class="btn-wrapper">
+                  <div class="btn-txt-area">
+                    <a href="https://so-youngpark.github.io/apple/" target="_blank" class="btn">
+                      <div class="arrow-icon">
+                        <svg>
+                          <use xlink:href="#arrow"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="#arrow"></use>
+                        </svg>
+                      </div>
+                      <span class="arrow-txt" data-content="Apple Watch">
+                        <span>Apple Watch</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="img-area">
+                <img loading="eager" src="./assets/images/apple.jpg" alt="Apple Watch" class="project-img" />
+              </div>
+            </div>
+          </div>
+          <div class="project-wrapper">
+            <div class="top-area">
+              <div class="num">[ <span>03</span> ]</div>
+              <div class="icon-wrapper">
+                <div class="icon">
+                  <svg>
+                    <use xlink:href="#icon"></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="info-wrapper">
+                <div class="txt-area">
+                  <ul class="hashtag">
+                    <li>#gsap</li>
+                    <li>#js</li>
+                    <li>#css3</li>
+                    <li>#swiper</li>
+                    <li>#lenis</li>
+                    <li>#scrollTrigger</li>
+                    <li>#canvas</li>
+                  </ul>
+                  <p class="txt">
+                    핫소스 판매 사이트를 클론 코딩한 사이트로, Canvas와 GSAP을
+                    활용한 다양한 애니메이션 효과가 적용된 반응형 사이트입니다.
+                  </p>
+                </div>
+                <div class="btn-wrapper">
+                  <div class="btn-txt-area">
+                    <a href="https://so-youngpark.github.io/hotsauce/" target="_blank" class="btn">
+                      <div class="arrow-icon">
+                        <svg>
+                          <use xlink:href="#arrow"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="#arrow"></use>
+                        </svg>
+                      </div>
+                      <span class="arrow-txt" data-content="Hot Sauce">
+                        <span>Hot Sauce</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="img-area">
+                <img loading="eager" src="./assets/images/hot.jpg" alt="Hot Sauce" class="project-img" />
+              </div>
+            </div>
+          </div>
+          <div class="project-wrapper">
+            <div class="top-area">
+              <div class="num">[ <span>04</span> ]</div>
+              <div class="icon-wrapper">
+                <div class="icon">
+                  <svg>
+                    <use xlink:href="#icon"></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="info-wrapper">
+                <div class="txt-area">
+                  <ul class="hashtag">
+                    <li>#cafe24</li>
+                    <li>#swiper</li>
+                    <li>#jQuery</li>
+                    <li>#js</li>
+                    <li>#css3</li>
+                    <li>#HTML5</li>
+                  </ul>
+                  <p class="txt">
+                    Cafe24 플랫폼을 사용하여 쇼핑몰 사이트를 클론 코딩한
+                    사이트입니다.
+                  </p>
+                </div>
+                <div class="btn-wrapper">
+                  <div class="btn-txt-area">
+                    <a href="https://zzangsysh.cafe24.com/skin-skin2#" target="_blank" class="btn">
+                      <div class="arrow-icon">
+                        <svg>
+                          <use xlink:href="#arrow"></use>
+                        </svg>
+                        <svg>
+                          <use xlink:href="#arrow"></use>
+                        </svg>
+                      </div>
+                      <span class="arrow-txt" data-content="Cafe 24">
+                        <span>Cafe 24</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="img-area">
+                <img loading="eager" src="./assets/images/cafe.jpg" alt="Cafe 24" class="project-img" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer">
+      <div class="footer-content-wrapper">
+        <h2 class="name">
+          <span>Park So Young</span>
+        </h2>
+        <p class="mail">
+          Mail: <a href="mailto:zzangsysh@naver.com">zzangsysh@naver.com</a>
+        </p>
+        <div class="footer-nav">
+          <div class="btn-area">
+            <a href="#about" class="btn">
+              <div class="arrow-icon">
+                <svg>
+                  <use xlink:href="#arrow"></use>
+                </svg>
+                <svg>
+                  <use xlink:href="#arrow"></use>
+                </svg>
+              </div>
+              <span class="arrow-txt" data-content="About">
+                <span><i>A</i>bout</span>
+              </span>
+            </a>
+          </div>
+          <div class="btn-area">
+            <a href="#projects" class="btn">
+              <div class="arrow-icon">
+                <svg>
+                  <use xlink:href="#arrow"></use>
+                </svg>
+                <svg>
+                  <use xlink:href="#arrow"></use>
+                </svg>
+              </div>
+              <span class="arrow-txt" data-content="Projects">
+                <span><i>P</i>rojects</span>
+              </span>
+            </a>
+          </div>
+          <div class="btn-area">
+            <a href="mailto:zzangsysh@naver.com" class="btn">
+              <div class="arrow-icon">
+                <svg>
+                  <use xlink:href="#arrow"></use>
+                </svg>
+                <svg>
+                  <use xlink:href="#arrow"></use>
+                </svg>
+              </div>
+              <span class="arrow-txt" data-content="Contact">
+                <span><i>C</i>ontact</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">© 2026 Park So Young. All Rights Reserved</div>
+      <div class="bg">
+        <div class="bg-inner">
+          <video loop autoplay muted src="./assets/images/bg.mp4"></video>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
